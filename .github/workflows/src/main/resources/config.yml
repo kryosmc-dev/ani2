@@ -1,0 +1,187 @@
+# ============================================================
+#  DeathAnimation - Vórtice 3D de muerte
+#  Solo usa bloques falsos (visuales): sin partículas, sin sonidos,
+#  sin entidades display ni texturas. Compatible con Bedrock (Geyser).
+# ============================================================
+
+# Activa o desactiva todo el plugin.
+enabled: true
+
+# Mundos donde funciona. Vacío = todos.
+# Ejemplo: worlds: [world, world_nether]
+worlds: []
+
+# Causas de daño que NO activan la animación (muerte normal).
+# Lista completa: https://jd.papermc.io/paper/1.21.11/org/bukkit/event/entity/EntityDamageEvent.DamageCause.html
+ignored-causes:
+  - VOID
+
+# Solo anima si el jugador está parado sobre un bloque sólido.
+require-ground: true
+
+# Si el jugador sostiene un Tótem de la inmortalidad, no se anima.
+skip-if-totem: true
+
+# Bloquear comandos mientras dura la animación.
+block-commands: true
+
+# Distancia (en bloques) a la que otros jugadores ven la animación.
+view-distance: 48
+
+# Estilo por defecto.
+default-style: portal
+
+# Si es true, se elige un estilo al azar entre todos los de abajo.
+random-style: false
+
+# Si es true, un jugador con el permiso deathanim.style.<nombre> usa ese estilo.
+style-by-permission: true
+
+# ------------------------------------------------------------
+#  ESTILOS (puedes crear todos los que quieras)
+#
+#  Cómo es la animación:
+#   - Se abre un EMBUDO hacia abajo (un vórtice 3D) con una espiral de colores
+#     que gira, un marco oscuro en el borde y pilares que orbitan alrededor.
+#   - El jugador cae por el embudo, con la cámara girando y mirando hacia el
+#     fondo. Al entrar de lleno, el personaje deja de verse.
+#   - El embudo se estrecha y se cierra. El jugador muere en su sitio.
+#
+#  Forma:
+#   radius          Radio de la boca del embudo (2 a 12).
+#   hole-radius     Radio del fondo del embudo (más pequeño = más "tornado").
+#   depth           Profundidad del embudo en bloques (3 a 16).
+#
+#  Tiempos (20 ticks = 1 segundo):
+#   open-ticks      Lo que tarda en abrirse el vórtice.
+#   sink-start-tick En qué tick empieza a caer el jugador.
+#   sink-ticks      Lo que dura la caída.
+#   close-ticks     Lo que tarda en cerrarse.
+#
+#  Cámara y jugador:
+#   yaw-spin        Grados que gira la cámara por tick mientras cae (0 = no gira).
+#   look-pitch      Hacia dónde mira al caer (90 = recto hacia abajo, 0 = al frente).
+#   hide-depth      Bloques que baja antes de volverse invisible.
+#
+#  Espiral:
+#   arms            Brazos de la espiral.
+#   twist           Qué tan enroscada es hacia abajo.
+#   spin-speed      Velocidad de giro (negativo = sentido contrario).
+#   palette         Bloques (nombres de Material) que forman los colores.
+#
+#  Decoración:
+#   rim-block       Bloque del marco alrededor de la boca.
+#   core-block      Bloque brillante del fondo ("la luz del final").
+#   pillar-block    Bloque de los pilares que orbitan.
+#   pillars         Cantidad de pilares (0 = sin pilares).
+#   pillar-height   Altura de los pilares.
+#   pillar-spin     Velocidad con la que orbitan.
+#
+#  Todos son bloques normales del juego: se ven igual en Bedrock.
+# ------------------------------------------------------------
+styles:
+  portal:
+    radius: 4.0
+    hole-radius: 1.0
+    depth: 7
+    open-ticks: 30
+    sink-start-tick: 8
+    sink-ticks: 44
+    close-ticks: 16
+    yaw-spin: 7.0
+    look-pitch: 65
+    hide-depth: 3.0
+    arms: 3
+    twist: 0.5
+    spin-speed: 0.08
+    palette:
+      - BLACK_CONCRETE
+      - PURPLE_CONCRETE
+      - MAGENTA_CONCRETE
+      - PURPLE_CONCRETE
+    rim-block: CRYING_OBSIDIAN
+    core-block: SEA_LANTERN
+    pillar-block: OBSIDIAN
+    pillars: 6
+    pillar-height: 4
+    pillar-spin: 0.06
+
+  fuego:
+    radius: 3.5
+    hole-radius: 1.0
+    depth: 7
+    open-ticks: 24
+    sink-start-tick: 6
+    sink-ticks: 40
+    close-ticks: 14
+    yaw-spin: 0.0
+    look-pitch: 70
+    hide-depth: 3.0
+    arms: 4
+    twist: 0.35
+    spin-speed: 0.12
+    palette:
+      - BLACK_CONCRETE
+      - RED_CONCRETE
+      - ORANGE_CONCRETE
+      - YELLOW_CONCRETE
+      - ORANGE_CONCRETE
+      - RED_CONCRETE
+    rim-block: BLACKSTONE
+    core-block: GLOWSTONE
+    pillar-block: NETHER_BRICKS
+    pillars: 8
+    pillar-height: 3
+    pillar-spin: 0.09
+
+  vacio:
+    radius: 5.0
+    hole-radius: 1.5
+    depth: 9
+    open-ticks: 36
+    sink-start-tick: 10
+    sink-ticks: 52
+    close-ticks: 18
+    yaw-spin: 5.0
+    look-pitch: 80
+    hide-depth: 4.0
+    arms: 2
+    twist: 0.6
+    spin-speed: -0.06
+    palette:
+      - BLACK_CONCRETE
+      - GRAY_CONCRETE
+      - BLACK_CONCRETE
+      - LIGHT_GRAY_CONCRETE
+    rim-block: OBSIDIAN
+    core-block: WHITE_CONCRETE
+    pillar-block: BLACK_CONCRETE
+    pillars: 4
+    pillar-height: 6
+    pillar-spin: 0.04
+
+  esmeralda:
+    radius: 3.5
+    hole-radius: 1.0
+    depth: 7
+    open-ticks: 26
+    sink-start-tick: 8
+    sink-ticks: 40
+    close-ticks: 14
+    yaw-spin: 12.0
+    look-pitch: 65
+    hide-depth: 3.0
+    arms: 5
+    twist: 0.35
+    spin-speed: 0.12
+    palette:
+      - GREEN_CONCRETE
+      - LIME_CONCRETE
+      - CYAN_CONCRETE
+      - LIME_CONCRETE
+    rim-block: EMERALD_BLOCK
+    core-block: SEA_LANTERN
+    pillar-block: DARK_PRISMARINE
+    pillars: 6
+    pillar-height: 4
+    pillar-spin: 0.07

@@ -1,0 +1,20 @@
+name: DeathAnimation
+version: '1.0.0'
+main: com.deathanim.DeathAnimationPlugin
+api-version: '1.21'
+description: Animaciones de muerte con bloques (compatible con Bedrock, sin dependencias).
+commands:
+  deathanim:
+    description: Administra el plugin DeathAnimation.
+    usage: /<command> <reload|styles|test [jugador] [estilo]>
+    permission: deathanim.admin
+permissions:
+  deathanim.use:
+    description: Ver la animación al morir.
+    default: true
+  deathanim.bypass:
+    description: Morir de forma normal, sin animación.
+    default: false
+  deathanim.admin:
+    description: Usar el comando /deathanim.
+    default: op
